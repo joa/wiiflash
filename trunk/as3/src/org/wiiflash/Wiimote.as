@@ -566,7 +566,6 @@ package org.wiiflash
 		public function get home(): Boolean
 		{
 			return ( buttons[ I6 ] as Button ).state;
-		
 		}
 		
 		/**
@@ -787,7 +786,6 @@ package org.wiiflash
 			eventDispatcher.dispatchEvent( new WiimoteEvent( WiimoteEvent.UPDATE ) );
 		}
 		
-		// todo: document those two events
 		private function onConnect( event: Event ): void
 		{
 			eventDispatcher.dispatchEvent( event );
