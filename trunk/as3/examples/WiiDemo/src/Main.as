@@ -99,19 +99,19 @@ package
 		{
 			flash++;
 			
-			if ( (flash % 0x20 ) == 0 )
+			if ( ( flash % 0x20 ) == 0 )
 			{
 				wiimote.leds = Wiimote.LED1;
 			}
-			if ( (flash % 0x40 ) == 0 )
+			if ( ( flash % 0x40 ) == 0 )
 			{
 				wiimote.leds = Wiimote.LED2;
 			}
-			if ( (flash % 0x60 ) == 0 )
+			if ( ( flash % 0x60 ) == 0 )
 			{
 				wiimote.leds = Wiimote.LED3;
 			}
-			if ( (flash % 0x80 ) == 0 )
+			if ( ( flash % 0x80 ) == 0 )
 			{
 				wiimote.leds = Wiimote.LED4;
 			}
