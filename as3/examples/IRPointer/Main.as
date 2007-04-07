@@ -36,35 +36,25 @@ package
 		private var x0: Number;
 		private var y0: Number;
 		
-		private var p1: Shape;
-		private var p2: Shape;
+		private var pointer: Shape;
 		
 		public function Main()
 		{
 			stage.scaleMode = StageScaleMode.EXACT_FIT;
 			
-			addChild( p1 = new Shape );
+			addChild( pointer = new Shape );
 			
-			p1.graphics.lineStyle( 1, 0xff00, .5 );
-			p1.graphics.drawCircle( 0, 0, 8 );
+			pointer.graphics.lineStyle( 1, 0xff00ff );
+			pointer.graphics.drawCircle( 0, 0, 8 );
 			
-			p1.graphics.moveTo( 0, -10 );
-			p1.graphics.lineTo( 0, 10 );
+			pointer.graphics.moveTo( 0, -10 );
+			pointer.graphics.lineTo( 0, 10 );
 			
-			p1.graphics.moveTo( -10, 0 );
-			p1.graphics.lineTo( 10, 0 );
+			pointer.graphics.moveTo( -10, 0 );
+			pointer.graphics.lineTo( 10, 0 );
 			
-			addChild( p2 = new Shape );
-			
-			p2.graphics.lineStyle( 1, 0xff, .5 );
-			p2.graphics.drawCircle( 0, 0, 8 );
-			
-			p2.graphics.moveTo( 0, -10 );
-			p2.graphics.lineTo( 0, 10 );
-			
-			p2.graphics.moveTo( -10, 0 );
-			p2.graphics.lineTo( 10, 0 );
-			
+			x0 = y0 = 0;
+		
 			wiimote = new Wiimote;
 			
 			wiimote.addEventListener( Event.CONNECT, onWiimoteConnect );
@@ -78,25 +68,40 @@ package
 		
 		private function onEnterFrame( event: Event ): void
 		{
+			//-- Check if Wiimote can see point 1
 			if ( wiimote.ir.p1 )
 			{
-				p1.visible = true;
+				//-- Assign position to pointer
 				
-				p1.x = ( 1 - wiimote.ir.x1 ) * stage.stageWidth;
-				p1.y = wiimote.ir.y1 * stage.stageHeight;
+				if ( Math.abs( wiimote.ir.x1 - x0 ) > .0001 )
+				{
+					pointer.x = ( 1 - wiimote.ir.x1 ) * stage.stageWidth;
+					x0 = wiimote.ir.x1;
+				}
+				
+				if ( Math.abs( wiimote.ir.y1 - y0 ) > .0001 )
+				{
+					pointer.y = wiimote.ir.y1 * stage.stageHeight;
+					y0 = wiimote.ir.y1;
+				}
 			}
-			else
-				p1.visible = false;
-				
-			if ( wiimote.ir.p2 )
+			//-- Search for point 2
+			else if ( wiimote.ir.p2 )
 			{
-				p2.visible = true;
+				//-- Assign position to pointer
 				
-				p2.x = ( 1 - wiimote.ir.x2 ) * stage.stageWidth;
-				p2.y = wiimote.ir.y2 * stage.stageHeight;
+				if ( Math.abs( wiimote.ir.x2 - x0 ) > .0001 )
+				{
+					pointer.x = ( 1 - wiimote.ir.x2 ) * stage.stageWidth;
+					x0 = wiimote.ir.x2;
+				}
+				
+				if ( Math.abs( wiimote.ir.y2 - y0 ) > .0001 )
+				{
+					pointer.y = wiimote.ir.y2 * stage.stageHeight;
+					y0 = wiimote.ir.y2;
+				}
 			}
-			else
-				p2.visible = false;
 		}
 	}
 }
