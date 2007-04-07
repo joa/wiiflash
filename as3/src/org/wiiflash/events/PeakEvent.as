@@ -31,6 +31,7 @@ package org.wiiflash.events
 	 */
 	public final class PeakEvent extends Event
 	{
+		
 		/**
 		* Type of the peak event that is dispatched by a HistoryPeakDetection object.
 		*/	
