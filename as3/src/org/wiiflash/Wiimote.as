@@ -342,12 +342,12 @@ package org.wiiflash
 		/**
 		* The third LED.
 		*/		
-		public static const LED3: int = 3;
+		public static const LED3: int = 4;
 		
 		/**
 		* The fourth LED.
 		*/		
-		public static const LED4: int = 4;
+		public static const LED4: int = 8;
 		
 		//-- Typesafe numbers for fast array access
 		private static const I0: int = 0;
